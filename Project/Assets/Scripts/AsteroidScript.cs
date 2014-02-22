@@ -7,6 +7,7 @@ public class AsteroidScript : MonoBehaviour
 
 	private GameObject cam;
 	private GameObject player;
+	public GameObject AsteroidCollision;
 
 	void Start()
 	{
@@ -47,7 +48,7 @@ public class AsteroidScript : MonoBehaviour
 		}
 		else if(coll.gameObject.name == "Asteroid(Clone)")
 		{
-			if(this.transform.localScale.x > coll.gameObject.transform.localScale.x)
+			if(this.transform.localScale.x >= coll.gameObject.transform.localScale.x)
 			{
 				Vector3 thisVelocity = this.rigidbody.velocity * this.rigidbody.mass;
 				Vector3 collVelocity = coll.rigidbody.velocity * coll.rigidbody.mass;
@@ -59,11 +60,11 @@ public class AsteroidScript : MonoBehaviour
 				this.rigidbody.mass = newMass;
 				this.rigidbody.velocity = newVelocity;
 				this.transform.localScale = Vector3.one * Mathf.Pow(newMass, 1f / 3f);
+
+				GameObject particle = Instantiate(AsteroidCollision, coll.transform.position, Quaternion.identity) as GameObject;
+				particle.rigidbody.velocity = this.rigidbody.velocity;
+				Destroy(particle, 5);
 			}
-		}
-		else if(coll.gameObject.name == "Missile(Clone)")
-		{
-			Destroy(coll.gameObject);
 		}
 	}
 }

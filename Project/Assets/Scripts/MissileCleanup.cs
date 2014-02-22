@@ -18,4 +18,12 @@ public class MissileCleanup : MonoBehaviour {
 			Destroy(this.gameObject);
 		}
 	}
+
+	void OnCollisionEnter(Collision coll)
+	{
+		if(coll.gameObject.name == "Asteroid(Clone)")
+		{
+			Destroy(this.gameObject);
+		}
+	}
 }
