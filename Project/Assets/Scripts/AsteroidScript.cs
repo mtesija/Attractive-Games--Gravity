@@ -17,7 +17,8 @@ public class AsteroidScript : MonoBehaviour
 
 	void Update()
 	{
-		Gravity();
+		GravityToPlayer();
+		GravityToAsteroids();
 
 		Vector3 position = cam.transform.position;
 		position.y = 0;
@@ -28,7 +29,7 @@ public class AsteroidScript : MonoBehaviour
 		}
 	}
 
-	void Gravity()
+	void GravityToPlayer()
 	{
 		Vector3 direction = player.transform.position - this.transform.position;
 		direction.Normalize();
@@ -38,6 +39,27 @@ public class AsteroidScript : MonoBehaviour
 		direction *= gravity * player.rigidbody.mass / (distance * distance);
 
 		this.rigidbody.AddForce(direction);
+	}
+
+	void GravityToAsteroids()
+	{
+		GameObject[] Objects = GameObject.FindGameObjectsWithTag("Asteroid") as GameObject[];
+		foreach(GameObject obj in Objects)
+		{
+			float distance = Vector3.Distance(obj.transform.position, this.transform.position);
+
+			if(distance == 0)
+			{
+				continue;
+			}
+
+			Vector3 direction = obj.transform.position - this.transform.position;
+			direction.Normalize();
+
+			direction *= gravity * 50 * obj.rigidbody.mass / (distance * distance);
+			
+			this.rigidbody.AddForce(direction);
+		}
 	}
 
 	void OnCollisionEnter(Collision coll)
@@ -64,6 +86,23 @@ public class AsteroidScript : MonoBehaviour
 				GameObject particle = Instantiate(AsteroidCollision, coll.transform.position, Quaternion.identity) as GameObject;
 				particle.rigidbody.velocity = this.rigidbody.velocity;
 				Destroy(particle, 5);
+			}
+		}
+		else if(coll.gameObject.name == "Missile(Clone)")
+		{
+			GameObject particle = Instantiate(AsteroidCollision, coll.transform.position, Quaternion.identity) as GameObject;
+			particle.rigidbody.velocity = this.rigidbody.velocity;
+			Destroy(particle, 5);
+
+			if(this.transform.localScale.x <= 6)
+			{
+				Destroy(this.gameObject);
+			}
+			else
+			{
+				float newSize = this.transform.localScale.x - 2;
+				this.rigidbody.mass = Mathf.Pow(newSize, 3f);
+				this.transform.localScale = Vector3.one * newSize;
 			}
 		}
 	}
