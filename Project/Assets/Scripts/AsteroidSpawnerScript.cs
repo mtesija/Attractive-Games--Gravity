@@ -46,5 +46,7 @@ public class AsteroidSpawnerScript : MonoBehaviour {
 		asteroid.rigidbody.velocity = new Vector3(Mathf.Cos(angle), 0 , Mathf.Sin(angle)) * velocity;
 		asteroid.transform.localScale = Vector3.one * size;
 		asteroid.rigidbody.mass = size * 20;
+
+		asteroid.rigidbody.AddTorque(new Vector3(Random.Range(0,1), Random.Range(0,1), Random.Range(0,1)));
 	}
 }

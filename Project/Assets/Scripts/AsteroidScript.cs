@@ -61,5 +61,19 @@ public class AsteroidScript : MonoBehaviour
 				this.transform.localScale = Vector3.one * Mathf.Pow(newMass, 1f / 3f);
 			}
 		}
+		else if(coll.gameObject.name == "Missle(Clone)")
+		{
+			Destroy(coll.gameObject);
+
+			if(this.transform.localScale.x <= 2)
+			{
+				Destroy(this.gameObject);
+			}
+			else
+			{
+				float newMass = this.rigidbody.mass - 2;
+				this.transform.localScale = Vector3.one * Mathf.Pow(newMass, 1f / 3f);
+			}
+		}
 	}
 }
