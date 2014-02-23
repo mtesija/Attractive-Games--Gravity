@@ -30,6 +30,7 @@ public class CameraScript : MonoBehaviour {
 		else
 		{
 			GUI.Box(new Rect(0, Screen.height/2, Screen.width, 50), "You Died!");
+			GUI.Box(new Rect(0, Screen.height/2 + 20, Screen.width, 50), "Press Escape to Return to the Main Menu");
 		}
 	}
 }
