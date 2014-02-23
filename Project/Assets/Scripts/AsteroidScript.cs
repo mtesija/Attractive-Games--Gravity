@@ -8,11 +8,13 @@ public class AsteroidScript : MonoBehaviour
 	private GameObject cam;
 	private GameObject player;
 	public GameObject AsteroidCollision;
+	private ScoreScript score;
 
 	void Start()
 	{
 		cam = GameObject.Find("Main Camera");
 		player = GameObject.Find("Player");
+		score = GameObject.Find ("ScoreKeeper").GetComponent<ScoreScript>();
 	}
 
 	void Update()
@@ -23,7 +25,7 @@ public class AsteroidScript : MonoBehaviour
 		Vector3 position = cam.transform.position;
 		position.y = 0;
 
-		if(Vector3.Distance(position, this.transform.position) > 200)
+		if(Vector3.Distance(position, this.transform.position) > 600)
 		{
 			Destroy(this.gameObject);
 		}
@@ -96,10 +98,12 @@ public class AsteroidScript : MonoBehaviour
 
 			if(this.transform.localScale.x <= 6)
 			{
+				score.score += 100;
 				Destroy(this.gameObject);
 			}
 			else
 			{
+				score.score += 20;
 				float newSize = this.transform.localScale.x - 2;
 				this.rigidbody.mass = Mathf.Pow(newSize, 3f);
 				this.transform.localScale = Vector3.one * newSize;

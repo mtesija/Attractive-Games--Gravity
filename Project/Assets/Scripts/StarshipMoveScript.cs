@@ -22,5 +22,20 @@ public class StarshipMoveScript : MonoBehaviour {
 		forward = Input.GetAxis("Horizontal");
 		right = Input.GetAxis("Vertical");
 		controller.Move(new Vector3(forward, 0, right));
+
+		float x = this.transform.position.x;
+		float z = this.transform.position.z;
+
+		if(x <= -125)
+			x = -125;
+		else if(x >= 125)
+			x = 125;
+
+		if(z <= -125)
+			z = -125;
+		else if(z >= 125)
+			z = 125;
+
+		this.transform.position = new Vector3 (x, 1, z);
 	}
 }

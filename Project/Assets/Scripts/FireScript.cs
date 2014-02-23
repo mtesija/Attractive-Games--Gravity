@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FireScript : MonoBehaviour {
 	public GameObject Missile;
-	float reloadTime = .4f;
+	float reloadTime = .2f;
 	// Use this for initialization
 	void Start () {
 	
