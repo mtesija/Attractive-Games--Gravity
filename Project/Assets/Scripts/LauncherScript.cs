@@ -8,7 +8,8 @@ public class LauncherScript : MonoBehaviour {
 // Change the speed value to alter how quickly the object rotates toward the mouse.
  
 // speed is the rate at which the object will rotate
-	
+	public bool alive = true;
+
 	int speed = 10;
 	
 	void Update() {

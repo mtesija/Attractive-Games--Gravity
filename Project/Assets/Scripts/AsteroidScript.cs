@@ -69,7 +69,16 @@ public class AsteroidScript : MonoBehaviour
 		if(coll.gameObject.name == "Player")
 		{
 			Destroy(this.gameObject);
-			Application.LoadLevel("TitleScreen");
+
+			player.GetComponent<LauncherScript>().alive = false;
+
+			coll.gameObject.transform.parent.GetComponent<StarshipMoveScript>().enabled = false;
+			coll.gameObject.GetComponentInChildren<FireScript>().enabled = false;
+
+			Vector3 pos = coll.gameObject.transform.position;
+			pos.y = -200;
+			coll.gameObject.transform.position = pos;
+
 		}
 		else if(coll.gameObject.name == "Asteroid(Clone)")
 		{
