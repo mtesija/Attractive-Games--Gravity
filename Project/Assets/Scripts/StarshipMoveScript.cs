@@ -26,15 +26,15 @@ public class StarshipMoveScript : MonoBehaviour {
 		float x = this.transform.position.x;
 		float z = this.transform.position.z;
 
-		if(x <= -125)
-			x = -125;
-		else if(x >= 125)
-			x = 125;
+		if(x <= -225)
+			x = -225;
+		else if(x >= 225)
+			x = 225;
 
-		if(z <= -125)
-			z = -125;
-		else if(z >= 125)
-			z = 125;
+		if(z <= -225)
+			z = -225;
+		else if(z >= 225)
+			z = 225;
 
 		this.transform.position = new Vector3 (x, 1, z);
 	}

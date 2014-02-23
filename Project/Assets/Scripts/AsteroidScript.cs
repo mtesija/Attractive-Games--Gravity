@@ -69,6 +69,7 @@ public class AsteroidScript : MonoBehaviour
 		if(coll.gameObject.name == "Player")
 		{
 			Destroy(this.gameObject);
+			Application.LoadLevel("_Scene1");
 		}
 		else if(coll.gameObject.name == "Asteroid(Clone)")
 		{
